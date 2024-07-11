@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# PHPStan
+Api/vendor/bin/phpstan --configuration=Api/phpstan.neon --no-progress --memory-limit=1G
+
+exit 0
