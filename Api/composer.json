@@ -10,7 +10,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Soft\\Market\\": "src/"
+      "Src\\": "src/"
     }
   },
   "authors": [
