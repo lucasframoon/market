@@ -16,6 +16,16 @@ $dispatcher = simpleDispatcher(function (RouteCollector $r) {
     });
 });
 $httpMethod = $_SERVER['REQUEST_METHOD'];
+
+// Parse PUT requests body
+$parsedData = ['PUT' => []];
+if ($httpMethod === 'PUT') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (json_last_error() == JSON_ERROR_NONE) {
+        $parsedData['PUT'] = $data;
+    }
+}
+
 $uri = $_SERVER['REQUEST_URI'];
 if (false !== $pos = strpos($uri, '?')) {
     $uri = substr($uri, 0, $pos);
@@ -39,6 +49,10 @@ switch ($routeInfo[0]) {
         $handler = $routeInfo[1];
         [$controller, $method] = $handler;
         $vars = $routeInfo[2];
+
+        if (!empty($parsedData)) {
+            $vars = array_merge($vars, $parsedData);
+        }
 
         global $container;
         $controller = $container->get($controller);
