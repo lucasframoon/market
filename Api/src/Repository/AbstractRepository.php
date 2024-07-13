@@ -18,8 +18,6 @@ abstract class AbstractRepository
     {
     }
 
-    abstract public function save(AbstractModel $model): bool;
-
     public function findById(int $id): ?AbstractModel
     {
         $sql = "SELECT * 
@@ -38,7 +36,7 @@ abstract class AbstractRepository
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
 
-        return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_CLASS, $this->model) : null;
+        return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_CLASS, get_class($this->model)) : null;
     }
 
     public function findByColumn(string $columnName, string $value): ?array
