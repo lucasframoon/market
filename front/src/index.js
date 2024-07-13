@@ -9,6 +9,7 @@ import Products from "./components/Products/Products";
 import ProductTypes from "./components/ProductTypes/ProductTypes";
 import Sales from "./components/Sales/SalesList";
 import NewSales from "./components/Sales/NewSales";
+import ProductTypeForm from "./components/ProductTypes/ProductTypeForm";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
     {
         path: "/product-types",
         element: <ProductTypes />
+    },
+    {
+        path: "/product-types/form/:id?",
+        element: <ProductTypeForm />
     },
     {
         path: "/sales",
