@@ -30,7 +30,7 @@ const Dashboard = () => {
                         <Card.Text>
                             Configure os impostos aplicáveis aos produtos
                         </Card.Text>
-                        <Link to="/taxes" className="btn btn-primary">
+                        <Link to="/product-types" className="btn btn-primary">
                             Ver Impostos
                         </Link>
                     </Card.Body>

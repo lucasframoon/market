@@ -1,14 +1,19 @@
 <?php
 
-use Src\Test;
+use Src\Controller\ProductTypeController;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use function FastRoute\simpleDispatcher;
 
 $dispatcher = simpleDispatcher(function (RouteCollector $r) {
 
-   $r->get('/login', [Test::class, 'test']);
-
+    $r->addGroup('/product-types', function (RouteCollector $r) {
+        $r->post('/new', [ProductTypeController::class, 'new']);
+        $r->get('/list', [ProductTypeController::class, 'findAll']);
+        $r->get('/{id:[0-9]+}', [ProductTypeController::class, 'findById']);
+        $r->put('/{id:[0-9]+}', [ProductTypeController::class, 'update']);
+        $r->delete('/{id:[0-9]+}', [ProductTypeController::class, 'delete']);
+    });
 });
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
@@ -31,10 +36,11 @@ switch ($routeInfo[0]) {
 
         exit;
     case Dispatcher::FOUND:
-        global $container;
-        global $handler;
+        $handler = $routeInfo[1];
         [$controller, $method] = $handler;
         $vars = $routeInfo[2];
+
+        global $container;
         $controller = $container->get($controller);
         $response = $controller->$method($vars);
         echo json_encode($response);
