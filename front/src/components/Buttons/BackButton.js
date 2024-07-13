@@ -7,7 +7,7 @@ const BackButton = () => {
 
     return (
         <Button variant="secondary" onClick={() => navigate(-1)}
-                style={{ position: 'absolute', top: '30px', left: '20px' }}>
+                style={{ position: 'absolute', top: '30px', left: '20px', width: '70px' }}>
             Voltar
         </Button>
     );
