@@ -5,14 +5,10 @@ namespace Src\Model;
 class ProductType extends AbstractModel
 {
 
-    protected string $table;
+    private string $table = 'product_types';
 
-    public  int $id;
-    public  string $name;
-    public  float $tax_percentage;
+    protected  int $id = 0;
+    protected  string $name = '';
+    protected  float $taxPercentage = 0.0;
 
-    public function __construct()
-    {
-        $this->table = 'product_types';
-    }
 }
