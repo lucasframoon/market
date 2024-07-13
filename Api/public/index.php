@@ -8,3 +8,4 @@ use Src\Test;
 
 $test = new Test();
 echo json_encode(['data' => $test->sayHello(2222)]);
+exit;
