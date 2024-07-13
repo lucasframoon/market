@@ -4,12 +4,10 @@ import axios from "axios";
 import NewButton from "../Buttons/NewButton";
 import UpdateButton from "../Buttons/UpdateButton";
 import DeleteButton from "../Buttons/DeleteButton";
-import {useNavigate} from "react-router-dom";
 
 
 function ProductTypes() {
 
-    const navigate = useNavigate();
     const [productTypes, setProductTypes] = useState([]);
 
     useEffect(() => {
@@ -24,8 +22,8 @@ function ProductTypes() {
     const handleDeleteClick = async (id) => {
 
         try {
-            await axios.put('http://localhost:8080/product-types/delete/${id}');
-            navigate('/product-types');
+            await axios.delete(`http://localhost:8080/product-types/${id}`);
+            window.location.reload();
         } catch (error) {
             console.error('Error update product type:', error);
         }
@@ -34,7 +32,7 @@ function ProductTypes() {
 
     return (
         <div className="container">
-            <BackButton />
+            <BackButton path="/dashboard"/>
             <NewButton path="/product-types/form" />
             <h1 className="mt-5">Tipos de produtos</h1>
             <table className="table table-striped mt-3">
