@@ -18,11 +18,11 @@ class ProductTypeController extends AbstractController
     public function new(): int
     {
         //TODO post data validation
-        if (!$name = $_POST['name']?? null) {
+        if (!$name = $_POST['name'] ?? null) {
             throw new Exception('Parametro nome não pode ser vazio');
         }
 
-        if (!$tax_percentage = $_POST['tax_percentage']?? null){
+        if (!$tax_percentage = $_POST['tax_percentage'] ?? null) {
             throw new Exception('Parametro taxa não pode ser vazio');
         }
 
@@ -65,7 +65,7 @@ class ProductTypeController extends AbstractController
             throw new Exception('Parametro id não pode ser vazio');
         }
 
-        /** @var ProductType $productType */
+        /** @var ?ProductType $productType */
         $productType = $this->productTypeRepository->findById((int)$id, true);
         if (!$productType) {
             throw new Exception('Nao foi possivel encontrar o tipo de produto');
@@ -94,6 +94,10 @@ class ProductTypeController extends AbstractController
         //TODO id validation
         if (!$id = $args['id'] ?? null) {
             throw new Exception('Parametro id não pode ser vazio');
+        }
+
+        if ($this->productTypeRepository->hasProductsForType((int)$id)) {
+            throw new Exception('Não é possivel excluir um tipo de produto que contém produtos relacionados');
         }
 
         return $this->productTypeRepository->delete((int)$id);
