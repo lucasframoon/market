@@ -1,8 +1,8 @@
 <?php
 
-use Src\Controller\ProductTypeController;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
+use Src\Controller\ProductTypeController;
 use function FastRoute\simpleDispatcher;
 
 $dispatcher = simpleDispatcher(function (RouteCollector $r) {
@@ -56,9 +56,13 @@ switch ($routeInfo[0]) {
 
         global $container;
         $controller = $container->get($controller);
-        $response = $controller->$method($vars);
-        echo json_encode($response);
-
+        try {
+            $response = $controller->$method($vars);
+            echo json_encode($response);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['message' => $e->getMessage()]);
+        }
         exit;
     default:
         echo json_encode(['message' => 'Not found']);
