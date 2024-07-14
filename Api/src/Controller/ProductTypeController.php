@@ -83,4 +83,19 @@ class ProductTypeController extends AbstractController
 
         return $this->productTypeRepository->update($productType);
     }
+
+    /**
+     * @param array $args
+     * @return bool
+     * @throws Exception
+     */
+    public function delete(array $args): bool
+    {
+        //TODO id validation
+        if (!$id = $args['id'] ?? null) {
+            throw new Exception('Parametro id não pode ser vazio');
+        }
+
+        return $this->productTypeRepository->delete((int)$id);
+    }
 }
