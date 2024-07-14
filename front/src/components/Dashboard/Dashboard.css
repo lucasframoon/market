@@ -19,3 +19,11 @@
     margin: 5px auto;
 }
 
+.container .Card .card-text {
+    height: 4rem;
+}
+
+.container .Card .btn {
+    width: 60%;
+}
+

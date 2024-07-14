@@ -1,10 +1,11 @@
 import React from 'react';
 import './Dashboard.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import productImage from '../../assets/images/product.png';
 import taxesImage from '../../assets/images/taxes.png';
 import sellsImage from '../../assets/images/sells.png';
+
 const Dashboard = () => {
     return (
         <div className="container mt-5">
@@ -26,12 +27,12 @@ const Dashboard = () => {
                 <Card className="Card">
                     <Card.Img className="img" variant="top" src={taxesImage} />
                     <Card.Body>
-                        <Card.Title>Impostos</Card.Title>
+                        <Card.Title>Tipos de produtos e impostos</Card.Title>
                         <Card.Text>
-                            Configure os impostos aplicáveis aos produtos
+                            Configure os tipos de produtos e os respectivos impostos
                         </Card.Text>
-                        <Link to="/taxes" className="btn btn-primary">
-                            Ver Impostos
+                        <Link to="/product-types" className="btn btn-primary">
+                            Ver Tipos/Impostos
                         </Link>
                     </Card.Body>
                 </Card>

@@ -5,7 +5,7 @@ function Products() {
     return (
         <div className="container">
             <h1 className="mt-5">Produtos</h1>
-            <BackButton />
+            <BackButton path="/dashboard"/>
             <table className="table table-striped mt-3">
                 <thead>
                 <tr>

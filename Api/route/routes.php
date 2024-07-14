@@ -1,16 +1,31 @@
 <?php
 
-use Src\Test;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
+use Src\Controller\ProductTypeController;
 use function FastRoute\simpleDispatcher;
 
 $dispatcher = simpleDispatcher(function (RouteCollector $r) {
 
-   $r->get('/login', [Test::class, 'test']);
-
+    $r->addGroup('/product-types', function (RouteCollector $r) {
+        $r->post('/new', [ProductTypeController::class, 'new']);
+        $r->get('/list', [ProductTypeController::class, 'findAll']);
+        $r->get('/{id:[0-9]+}', [ProductTypeController::class, 'findById']);
+        $r->put('/{id:[0-9]+}', [ProductTypeController::class, 'update']);
+        $r->delete('/{id:[0-9]+}', [ProductTypeController::class, 'delete']);
+    });
 });
 $httpMethod = $_SERVER['REQUEST_METHOD'];
+
+// Parse PUT requests body
+$parsedData = ['PUT' => []];
+if ($httpMethod === 'PUT') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (json_last_error() == JSON_ERROR_NONE) {
+        $parsedData['PUT'] = $data;
+    }
+}
+
 $uri = $_SERVER['REQUEST_URI'];
 if (false !== $pos = strpos($uri, '?')) {
     $uri = substr($uri, 0, $pos);
@@ -31,14 +46,23 @@ switch ($routeInfo[0]) {
 
         exit;
     case Dispatcher::FOUND:
-        global $container;
-        global $handler;
+        $handler = $routeInfo[1];
         [$controller, $method] = $handler;
         $vars = $routeInfo[2];
-        $controller = $container->get($controller);
-        $response = $controller->$method($vars);
-        echo json_encode($response);
 
+        if (!empty($parsedData)) {
+            $vars = array_merge($vars, $parsedData);
+        }
+
+        global $container;
+        $controller = $container->get($controller);
+        try {
+            $response = $controller->$method($vars);
+            echo json_encode($response);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['message' => $e->getMessage()]);
+        }
         exit;
     default:
         echo json_encode(['message' => 'Not found']);
