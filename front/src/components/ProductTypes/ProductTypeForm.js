@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import Alert from "../Alerts/Alert";
+import BackButton from "../Buttons/BackButton";
 
 
 const ProductTypeForm = () => {
@@ -64,7 +65,8 @@ const ProductTypeForm = () => {
         <div className="container mt-5">
             {successAlertMessage && <Alert message={successAlertMessage} variant='primary'/>}
             {errorAlertMessage && <Alert message={errorAlertMessage} variant='danger'/>}
-            <h1>Tipo de Produto</h1>
+            <BackButton path="/product-types"/>
+            <h1>{id ? "Editar Tipo de Produto" : "Novo Tipo de Produto"}</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Nome</label>

@@ -2,7 +2,7 @@
 
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
-use Src\Controller\ProductTypeController;
+use Src\Controller\{ProductController, ProductTypeController};
 use function FastRoute\simpleDispatcher;
 
 $dispatcher = simpleDispatcher(function (RouteCollector $r) {
@@ -13,6 +13,14 @@ $dispatcher = simpleDispatcher(function (RouteCollector $r) {
         $r->get('/{id:[0-9]+}', [ProductTypeController::class, 'findById']);
         $r->put('/{id:[0-9]+}', [ProductTypeController::class, 'update']);
         $r->delete('/{id:[0-9]+}', [ProductTypeController::class, 'delete']);
+    });
+
+    $r->addGroup('/product', function (RouteCollector $r) {
+        $r->post('/new', [ProductController::class, 'new']);
+        $r->get('/list', [ProductController::class, 'findAll']);
+        $r->get('/{id:[0-9]+}', [ProductController::class, 'findById']);
+        $r->put('/{id:[0-9]+}', [ProductController::class, 'update']);
+        $r->delete('/{id:[0-9]+}', [ProductController::class, 'delete']);
     });
 });
 $httpMethod = $_SERVER['REQUEST_METHOD'];
@@ -60,7 +68,7 @@ switch ($routeInfo[0]) {
             $response = $controller->$method($vars);
             echo json_encode($response);
         } catch (Exception $e) {
-            http_response_code(500);
+//            http_response_code(500);
             echo json_encode(['message' => $e->getMessage()]);
         }
         exit;

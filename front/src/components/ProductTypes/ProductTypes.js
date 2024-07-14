@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import BackButton from "../Buttons/BackButton";
 import axios from "axios";
+import Alert from "../Alerts/Alert";
 import NewButton from "../Buttons/NewButton";
+import BackButton from "../Buttons/BackButton";
 import UpdateButton from "../Buttons/UpdateButton";
 import DeleteButton from "../Buttons/DeleteButton";
-import Alert from "../Alerts/Alert";
 
 function ProductTypes() {
     const [productTypes, setProductTypes] = useState([]);
