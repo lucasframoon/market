@@ -127,8 +127,10 @@ function SalesForm() {
         <div className="container mt-5">
             {successAlertMessage && <Alert message={successAlertMessage} variant='primary'/>}
             {errorAlertMessage && <Alert message={errorAlertMessage} variant='danger'/>}
-            <BackButton path="/sales"/>
             <h1>{id ? "Detalhes da venda" : "Registrar venda"}</h1>
+            <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <BackButton path="/sales"/>
+            </div>
             <Form onSubmit={handleSubmit}>
                 <Row className="mb-3">
                     <Col>
