@@ -2,7 +2,7 @@
 
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
-use Src\Controller\{ProductController, ProductTypeController};
+use Src\Controller\{ProductController, ProductTypeController, SaleController};
 use function FastRoute\simpleDispatcher;
 
 $dispatcher = simpleDispatcher(function (RouteCollector $r) {
@@ -21,6 +21,14 @@ $dispatcher = simpleDispatcher(function (RouteCollector $r) {
         $r->get('/{id:[0-9]+}', [ProductController::class, 'findById']);
         $r->put('/{id:[0-9]+}', [ProductController::class, 'update']);
         $r->delete('/{id:[0-9]+}', [ProductController::class, 'delete']);
+    });
+
+    $r->addGroup('/sales', function (RouteCollector $r) {
+        $r->post('/new', [SaleController::class, 'new']);
+        $r->get('/list', [SaleController::class, 'findAll']);
+        $r->get('/{id:[0-9]+}', [SaleController::class, 'findById']);
+//        $r->put('/{id:[0-9]+}', [SaleController::class, 'update']); //TODO not implemented yet
+        $r->delete('/{id:[0-9]+}', [SaleController::class, 'delete']);
     });
 });
 $httpMethod = $_SERVER['REQUEST_METHOD'];
