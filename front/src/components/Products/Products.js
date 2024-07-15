@@ -48,8 +48,10 @@ function Products() {
             {successAlertMessage && <Alert message={successAlertMessage} variant='primary'/>}
             {errorAlertMessage && <Alert message={errorAlertMessage} variant='danger'/>}
             <h1 className="mt-5">Produtos</h1>
-            <BackButton path="/dashboard"/>
-            <NewButton path="/product/form" />
+            <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <BackButton path="/"/>
+                <NewButton path="/product/form" />
+            </div>
             <table className="table table-striped mt-3">
                 <thead>
                 <tr>
