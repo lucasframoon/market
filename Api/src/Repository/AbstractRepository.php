@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Repository;
 
+use Exception;
 use PDO;
 use Src\Model\AbstractModel;
 
@@ -42,21 +45,22 @@ abstract class AbstractRepository
                 FROM " . $this->getTableName() . " 
                 WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(['id' => $id]);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
         if ($fetchClass) {
-            return $stmt->rowCount() > 0 ? $stmt->fetchObject(get_class($this->createModelInstance())) : null;
+            return $stmt->fetchObject(get_class($this->createModelInstance()));
         }
 
-        return $stmt->rowCount() > 0 ? $stmt->fetch() : null;
+        return $stmt->fetch();
     }
 
     /**
      * Find all data
      *
      * @param bool $fetchClass
-     * @return array|null
+     * @return array
      */
-    public function findAll(bool $fetchClass = false): ?array
+    public function findAll(bool $fetchClass = false): array
     {
         $sql = "SELECT * 
                 FROM " . $this->getTableName();
@@ -64,29 +68,29 @@ abstract class AbstractRepository
         $stmt->execute();
 
         if ($fetchClass) {
-            return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_CLASS, get_class($this->createModelInstance())) : null;
+            return $stmt->fetchAll(PDO::FETCH_CLASS, get_class($this->createModelInstance()));
         }
 
-        return $stmt->rowCount() > 0 ? $stmt->fetchAll() : null;
+        return $stmt->fetchAll();
     }
 
     /**
      * Find data by specific column
      *
      * @param string $columnName
-     * @param string $value
-     * @return array|null
+     * @param string|int $value
+     * @return array
      */
-    public function findByColumn(string $columnName, string $value): ?array
+    public function findByColumn(string $columnName, string|int $value): array
     {
         $sql = "SELECT * 
                 FROM " . $this->getTableName() . " 
-                WHERE {$columnName} LIKE :value";
+                WHERE " . $columnName . " LIKE :value";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':value', '%' . $value . '%');
         $stmt->execute();
 
-        return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_CLASS, $this->createModelInstance()) : null;
+        return $stmt->fetchAll(PDO::FETCH_CLASS, $this->createModelInstance());
     }
 
     /**
@@ -116,6 +120,36 @@ abstract class AbstractRepository
     }
 
     /**
+     * Create multiple data in one request
+     *
+     * @param array<AbstractModel> $models
+     * @return array
+     * @throws Exception
+     */
+    public function bulkCreate(array $models): array
+    {
+        if (empty($models)) {
+            return [];
+        }
+
+        if (!$this->pdo->inTransaction()) {
+            $this->pdo->beginTransaction();
+        }
+
+        $lastInsertIds = [];
+
+        try {
+            foreach ($models as $model) {
+                $lastInsertIds[] = $this->create($model);
+            }
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
+            throw $e;
+        }
+        return $lastInsertIds;
+    }
+
+    /**
      * Update data
      *
      * @param AbstractModel $model
@@ -133,8 +167,8 @@ abstract class AbstractRepository
         $fields = rtrim($fields, ', ');
 
         $sql = "UPDATE " . $this->getTableName() .
-               " SET " . $fields . 
-               " WHERE id = :id";
+            " SET " . $fields .
+            " WHERE id = :id";
 
         $stmt = $this->pdo->prepare($sql);
         foreach ($data as $key => $value) {
@@ -160,7 +194,27 @@ abstract class AbstractRepository
                 FROM " . $this->getTableName() . " 
                 WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(['id' => $id]);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        return $stmt->rowCount() > 0;
+    }
+
+    /**
+     * Delete data by specific column and value
+     *
+     * @param string $columnName
+     * @param string|int $value
+     * @return bool
+     */
+    public function deleteByColumn(string $columnName, string|int $value): bool
+    {
+        $sql = "DELETE 
+                FROM " . $this->getTableName() . " 
+                WHERE " . $columnName . " = :value";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':value', $value);
+        $stmt->execute();
 
         return $stmt->rowCount() > 0;
     }
