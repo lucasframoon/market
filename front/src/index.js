@@ -9,16 +9,12 @@ import Products from "./components/Products/Products";
 import ProductForm from "./components/Products/ProductForm";
 import ProductTypes from "./components/ProductTypes/ProductTypes";
 import ProductTypeForm from "./components/ProductTypes/ProductTypeForm";
-import Sales from "./components/Sales/SalesList";
-import NewSales from "./components/Sales/NewSales";
+import Sales from "./components/Sales/Sales";
+import SalesForm from "./components/Sales/SalesForm";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <NewSales/>
-    },
-    {
-        path: "/dashboard",
         element: <Dashboard/>
     },
     {
@@ -34,13 +30,17 @@ const router = createBrowserRouter([
         element: <ProductTypes/>
     },
     {
-        path: "/product-types/form/:id?",
+        path: "/product-type/form/:id?",
         element: <ProductTypeForm/>
     },
     {
         path: "/sales",
         element: <Sales/>
-    }
+    },
+    {
+        path: "/sale/form/:id?",
+        element: <SalesForm/>
+    },
 ])
 
 const root = createRoot(document.getElementById('root'));

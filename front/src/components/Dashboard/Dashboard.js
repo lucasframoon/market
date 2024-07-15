@@ -42,7 +42,7 @@ const Dashboard = () => {
                     <Card.Body>
                         <Card.Title>Vendas</Card.Title>
                         <Card.Text>
-                            Registre as vendas realizadas
+                            Visualize as vendas realizadsa e registre novas vendas
                         </Card.Text>
                         <Link to="/sales" className="btn btn-primary">
                             Ver Vendas
