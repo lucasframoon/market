@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\Repository;
 
 use PDO;
@@ -9,9 +11,9 @@ class ProductTypeRepository extends AbstractRepository
 {
 
     public function __construct(
-        protected PDO $db
+        protected PDO $pdo
     ) {
-        parent::__construct($db);
+        parent::__construct($pdo);
     }
 
     protected function createModelInstance(): ProductType
