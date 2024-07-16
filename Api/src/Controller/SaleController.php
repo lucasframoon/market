@@ -12,36 +12,37 @@ class SaleController extends AbstractController
 {
 
     public function __construct(
-        private readonly SaleRepository        $saleRepository,
-        private readonly ProductRepository     $productRepository
+        private readonly SaleRepository    $saleRepository,
+        private readonly ProductRepository $productRepository
     )
     {
     }
 
+    /**
+     * @throws Exception
+     */
     public function new(): bool
     {
+        $rules = [
+            'products' => ['type' => 'json', 'required' => true],
+            'sale_date' => ['type' => 'date', 'required' => true]
+        ];
 
-        //TODO post data validation
-
-        $postProducts = $_POST['products'] ?? null;
-        $saleDate = $_POST['sale_date'] ?? null;
-
-        if (is_null($postProducts)) {
-            throw new Exception('Adicione os itens da venda');
-        }
-
-        $postProducts = json_decode($postProducts, true);
-        if (empty($postProducts)) {
+        $postData = $this->validateInput(null, $rules);
+        if (empty($postData['products']) || !is_array($postData['products'])) {
             throw new Exception('Adicione os itens da venda');
         }
 
         $arraySalesDetails = [];
         $totalAmount = 0;
         $totalTax = 0;
-
         $productQuantities = [];
         $productsIds = [];
-        foreach ($postProducts as $product) {
+
+        foreach ($postData['products'] as $product) {
+            if (!isset($product['product_id'], $product['quantity'])) {
+                throw new Exception('Dados dos produtos inválidos');
+            }
             $productQuantities[$product['product_id']] = $product['quantity'];
             $productsIds[] = $product['product_id'];
         }
@@ -51,7 +52,7 @@ class SaleController extends AbstractController
         foreach ($productsInfo as $product) {
             $productId = $product['id'];
             $price = $product['price'];
-            $taxPercentage  = $product['tax_percentage'];
+            $taxPercentage = $product['tax_percentage'];
             $quantity = $productQuantities[$productId];
 
             $productTotalAmount = $price * $quantity;
@@ -69,7 +70,7 @@ class SaleController extends AbstractController
         }
 
         $sale = new Sales();
-        $sale->saleDate = $saleDate;
+        $sale->saleDate = $postData['sale_date'];
         $sale->totalAmount = $totalAmount;
         $sale->totalTax = $totalTax;
 
@@ -94,18 +95,14 @@ class SaleController extends AbstractController
      */
     public function findById(array $args): array
     {
-        //TODO id validation
-        if (!$id = $args['id'] ?? null) {
-            throw new Exception('Parametro id não pode ser vazio');
-        }
-
-        return $this->saleRepository->findByIdWithDetails((int)$id);
+        $arguments = $this->validateInput($args, ['id' => ['type' => 'int', 'required' => true]]);
+        return $this->saleRepository->findByIdWithDetails($arguments['id']);
     }
 
     //TODO implement update
     public function update(array $args): bool
     {
-        return false;
+        throw new Exception("Método 'update' não implementado");
     }
 
     /**
@@ -115,11 +112,7 @@ class SaleController extends AbstractController
      */
     public function delete(array $args): bool
     {
-        //TODO id validation
-        if (!$id = $args['id'] ?? null) {
-            throw new Exception('Parametro id não pode ser vazio');
-        }
-
-        return $this->saleRepository->deleteSale((int)$id);
+        $arguments = $this->validateInput($args, ['id' => ['type' => 'int', 'required' => true]]);
+        return $this->saleRepository->deleteSale($arguments['id']);
     }
 }

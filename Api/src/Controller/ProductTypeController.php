@@ -15,20 +15,21 @@ class ProductTypeController extends AbstractController
     {
     }
 
+    /**
+     * @throws Exception
+     */
     public function new(): int
     {
-        //TODO post data validation
-        if (!$name = $_POST['name'] ?? null) {
-            throw new Exception('Parametro nome não pode ser vazio');
-        }
+        $rules = [
+            'name' => ['type' => 'string', 'required' => true],
+            'tax_percentage' => ['type' => 'float', 'required' => true]
+        ];
 
-        if (!$tax_percentage = $_POST['tax_percentage'] ?? null) {
-            throw new Exception('Parametro taxa não pode ser vazio');
-        }
+        $postData = $this->validateInput(null, $rules);
 
         $productType = new ProductType();
-        $productType->taxPercentage = $tax_percentage;
-        $productType->name = $name;
+        $productType->taxPercentage = $postData['tax_percentage'];
+        $productType->name = $postData['name'];
 
         return $this->productTypeRepository->create($productType);
     }
@@ -45,12 +46,8 @@ class ProductTypeController extends AbstractController
      */
     public function findById(array $args): array
     {
-        //TODO id validation
-        if (!$id = $args['id'] ?? null) {
-            throw new Exception('Parametro id não pode ser vazio');
-        }
-
-        return $this->productTypeRepository->findById((int)$id);
+        $arguments = $this->validateInput($args, ['id' => ['type' => 'int', 'required' => true]]);
+        return $this->productTypeRepository->findById($arguments['id']);
     }
 
     /**
@@ -60,25 +57,33 @@ class ProductTypeController extends AbstractController
      */
     public function update(array $args): bool
     {
-        //TODO id and put data validation
-        if (!$id = $args['id'] ?? null) {
-            throw new Exception('Parametro id não pode ser vazio');
+        if (empty($args['PUT'])) {
+            throw new Exception('Não foi possível atualizar o tipo de produto');
         }
 
+        $rules = [
+            'id' => ['type' => 'int', 'required' => true],
+            'name' => ['type' => 'string', 'required' => false],
+            'tax_percentage' => ['type' => 'float', 'required' => false]
+        ];
+
+        $arguments = $this->validateInput(['id' => $args['id'], ...$args['PUT']], $rules);
+
         /** @var ?ProductType $productType */
-        $productType = $this->productTypeRepository->findById((int)$id, true);
+        $productType = $this->productTypeRepository->findById($arguments['id'], true);
         if (!$productType) {
             throw new Exception('Nao foi possivel encontrar o tipo de produto');
         }
 
-        if (!empty($args['PUT']) && $args['PUT']['name']) {
-            $name = $args['PUT']['name'];
-            $productType->name = $name;
+        if (isset($arguments['name'])) {
+            $productType->name = $arguments['name'];
         }
 
-        if (!empty($args['PUT']) && $args['PUT']['tax_percentage']) {
-            $taxPercentage = $args['PUT']['tax_percentage'];
-            $productType->taxPercentage = $taxPercentage;
+        if (isset($arguments['tax_percentage'])) {
+            if ($arguments['tax_percentage'] < 0) {
+                throw new Exception('Taxa deve ser maior que zero');
+            }
+            $productType->taxPercentage = $arguments['tax_percentage'];
         }
 
         return $this->productTypeRepository->update($productType);
@@ -91,15 +96,11 @@ class ProductTypeController extends AbstractController
      */
     public function delete(array $args): bool
     {
-        //TODO id validation
-        if (!$id = $args['id'] ?? null) {
-            throw new Exception('Parametro id não pode ser vazio');
-        }
-
-        if ($this->productTypeRepository->hasProductsForType((int)$id)) {
+        $arguments = $this->validateInput($args, ['id' => ['type' => 'int', 'required' => true]]);
+        if ($this->productTypeRepository->hasProductsForType($arguments['id'])) {
             throw new Exception('Não é possivel excluir um tipo de produto que contém produtos relacionados');
         }
 
-        return $this->productTypeRepository->delete((int)$id);
+        return $this->productTypeRepository->delete($arguments['id']);
     }
 }
