@@ -47,9 +47,11 @@ function ProductTypes() {
         <div className="container">
             {successAlertMessage && <Alert message={successAlertMessage} variant='primary'/>}
             {errorAlertMessage && <Alert message={errorAlertMessage} variant='danger'/>}
-            <BackButton path="/dashboard"/>
-            <NewButton path="/product-types/form" />
             <h1 className="mt-5">Tipos de produtos</h1>
+            <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <BackButton path="/"/>
+                <NewButton path="/product-type/form" />
+            </div>
             <table className="table table-striped mt-3">
                 <thead>
                 <tr>
@@ -64,7 +66,7 @@ function ProductTypes() {
                         <td>{type.name}</td>
                         <td>{type.tax_percentage}%</td>
                         <td>
-                            <UpdateButton path='/product-types/form' id={type.id} />
+                            <UpdateButton path='/product-type/form' id={type.id} />
                             <DeleteButton handleClick={() => handleDeleteClick(type.id)} />
                         </td>
                     </tr>

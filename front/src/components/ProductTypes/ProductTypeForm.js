@@ -65,8 +65,10 @@ const ProductTypeForm = () => {
         <div className="container mt-5">
             {successAlertMessage && <Alert message={successAlertMessage} variant='primary'/>}
             {errorAlertMessage && <Alert message={errorAlertMessage} variant='danger'/>}
-            <BackButton path="/product-types"/>
             <h1>{id ? "Editar Tipo de Produto" : "Novo Tipo de Produto"}</h1>
+            <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <BackButton path="/product-types"/>
+            </div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Nome</label>

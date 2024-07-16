@@ -1,4 +1,6 @@
-<?php /** @noinspection ALL */
+<?php
+
+declare(strict_types=1);
 
 namespace Src\Controller;
 
@@ -46,6 +48,11 @@ class ProductController extends AbstractController
         }
 
         return $this->productRepository->create($product);
+    }
+
+    public function findAllWithDetails(): array
+    {
+        return $this->productRepository->findAll();
     }
 
     public function findAll(): array

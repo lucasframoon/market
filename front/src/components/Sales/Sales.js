@@ -3,21 +3,20 @@ import axios from "axios";
 import Alert from "../Alerts/Alert";
 import NewButton from "../Buttons/NewButton";
 import BackButton from '../Buttons/BackButton';
-import UpdateButton from "../Buttons/UpdateButton";
 import DeleteButton from "../Buttons/DeleteButton";
 
-function Products() {
-    const [products, setProducts] = useState([]);
+function Sales() {
+    const [sales, setSales] = useState([]);
 
     const [successAlertMessage, setSuccessAlertMessage] = useState(null);
     const [errorAlertMessage, setErrorAlertMessage] = useState(null);
 
     useEffect(() => {
         let isMounted = true;
-        axios.get('http://localhost:8080/product/list')
+        axios.get('http://localhost:8080/sales/list')
             .then(response => {
                 if (isMounted) {
-                    setProducts(response.data);
+                    setSales(response.data);
                 }
             })
             .catch(error => {
@@ -34,46 +33,56 @@ function Products() {
 
     const handleDeleteClick = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/product/${id}`);
-            setProducts(prev => prev.filter(type => type.id !== id));
+            await axios.delete(`http://localhost:8080/sales/${id}`);
+            setSales(prev => prev.filter(type => type.id !== id));
             setSuccessAlertMessage("Deletado com sucesso");
         } catch (error) {
-            setErrorAlertMessage("Erro ao deletar o produto");
-            console.error('Error deleting product:', error);
+            setErrorAlertMessage("Erro ao deletar a venda");
+            console.error('Error deleting sale:', error);
         }
+    };
+
+    const formatSaleDetails = (details) => {
+        details = JSON.parse(details);
+        if (details === null || details.length === 0) {
+            return '';
+        }
+
+        return details.map((detail) => {
+            return `${detail.product_name} (${detail.quantity})`;
+        }).join(', ');
     };
 
     return (
         <div className="container">
             {successAlertMessage && <Alert message={successAlertMessage} variant='primary'/>}
             {errorAlertMessage && <Alert message={errorAlertMessage} variant='danger'/>}
-            <h1 className="mt-5">Produtos</h1>
+            <h1 className="mt-5">Vendas</h1>
             <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <BackButton path="/"/>
-                <NewButton path="/product/form" />
+                <NewButton path="/sale/form"/>
             </div>
             <table className="table table-striped mt-3">
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nome</th>
-                    <th>Preço</th>
-                    <th>Tipo</th>
-                    <th>Descrição</th>
+                    <th>Data</th>
+                    <th>Valor Total</th>
+                    <th>Imposto total</th>
+                    <th>Produtos</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
-                {products.map((product, index) => (
+                {sales.map((sale, index) => (
                     <tr key={index}>
-                        <td>{product.id}</td>
-                        <td>{product.name}</td>
-                        <td>{product.price}</td>
-                        <td>{product.type_name}</td>
-                        <td>{product.description}</td>
+                        <td>{sale.id}</td>
+                        <td>{sale.sale_date}</td>
+                        <td>{sale.total_amount}</td>
+                        <td>{sale.total_tax}</td>
+                        <td>{formatSaleDetails(sale.details)}</td>
                         <td>
-                            <UpdateButton path='/product/form' id={product.id}/>
-                            <DeleteButton handleClick={() => handleDeleteClick(product.id)}/>
+                            <DeleteButton handleClick={() => handleDeleteClick(sale.id)}/>
                         </td>
                     </tr>
                 ))}
@@ -83,4 +92,4 @@ function Products() {
     );
 }
 
-export default Products;
+export default Sales;
