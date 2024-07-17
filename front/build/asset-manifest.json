@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.465cf0aa.css",
+    "main.js": "/static/js/main.e76fd9b8.js",
+    "static/js/453.80efc53e.chunk.js": "/static/js/453.80efc53e.chunk.js",
+    "static/media/sells.png": "/static/media/sells.31430bbbf2d3219ff8dd.png",
+    "static/media/taxes.png": "/static/media/taxes.33d62dd19ad3bb932c0f.png",
+    "static/media/product.png": "/static/media/product.a79147b30f7b4d729257.png",
+    "index.html": "/index.html",
+    "main.465cf0aa.css.map": "/static/css/main.465cf0aa.css.map",
+    "main.e76fd9b8.js.map": "/static/js/main.e76fd9b8.js.map",
+    "453.80efc53e.chunk.js.map": "/static/js/453.80efc53e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.465cf0aa.css",
+    "static/js/main.e76fd9b8.js"
+  ]
+}
