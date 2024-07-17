@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\Users\lucas\Documents\PHP\Soft\Api\src</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css?v=11.0.5" rel="stylesheet" type="text/css">
+  <link href="_css/nv.d3.min.css?v=11.0.5" rel="stylesheet" type="text/css">
+  <link href="_css/style.css?v=11.0.5" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">C:\Users\lucas\Documents\PHP\Soft\Api\src</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Repository/AbstractRepository.php.html#12">Src\Repository\AbstractRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ProductRepository.php.html#10">Src\Repository\ProductRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ProductTypeRepository.php.html#10">Src\Repository\ProductTypeRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleDetailsRepository.php.html#10">Src\Repository\SaleDetailsRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleRepository.php.html#9">Src\Repository\SaleRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Model/AbstractModel.php.html#10">Src\Model\AbstractModel</a></td><td class="text-right">58%</td></tr>
+       <tr><td><a href="Controller/SaleController.php.html#12">Src\Controller\SaleController</a></td><td class="text-right">63%</td></tr>
+       <tr><td><a href="Controller/AbstractController.php.html#8">Src\Controller\AbstractController</a></td><td class="text-right">82%</td></tr>
+       <tr><td><a href="Controller/ProductController.php.html#12">Src\Controller\ProductController</a></td><td class="text-right">87%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Repository/AbstractRepository.php.html#12">Src\Repository\AbstractRepository</a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="Repository/SaleRepository.php.html#9">Src\Repository\SaleRepository</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Repository/ProductRepository.php.html#10">Src\Repository\ProductRepository</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Repository/ProductTypeRepository.php.html#10">Src\Repository\ProductTypeRepository</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Model/AbstractModel.php.html#10">Src\Model\AbstractModel</a></td><td class="text-right">27</td></tr>
+       <tr><td><a href="Controller/AbstractController.php.html#8">Src\Controller\AbstractController</a></td><td class="text-right">24</td></tr>
+       <tr><td><a href="Controller/ProductController.php.html#12">Src\Controller\ProductController</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/SaleController.php.html#12">Src\Controller\SaleController</a></td><td class="text-right">17</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Model/AbstractModel.php.html#19"><abbr title="Src\Model\AbstractModel::__get">__get</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Model/AbstractModel.php.html#55"><abbr title="Src\Model\AbstractModel::toArray">toArray</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Model/AbstractModel.php.html#72"><abbr title="Src\Model\AbstractModel::camelToSnake">camelToSnake</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#17"><abbr title="Src\Repository\AbstractRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#43"><abbr title="Src\Repository\AbstractRepository::findById">findById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#64"><abbr title="Src\Repository\AbstractRepository::findAll">findAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#85"><abbr title="Src\Repository\AbstractRepository::findByColumn">findByColumn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#103"><abbr title="Src\Repository\AbstractRepository::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#130"><abbr title="Src\Repository\AbstractRepository::bulkCreate">bulkCreate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#159"><abbr title="Src\Repository\AbstractRepository::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#192"><abbr title="Src\Repository\AbstractRepository::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#211"><abbr title="Src\Repository\AbstractRepository::deleteByColumn">deleteByColumn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ProductRepository.php.html#13"><abbr title="Src\Repository\ProductRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ProductRepository.php.html#20"><abbr title="Src\Repository\ProductRepository::createModelInstance">createModelInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ProductRepository.php.html#25"><abbr title="Src\Repository\ProductRepository::getTableName">getTableName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ProductRepository.php.html#36"><abbr title="Src\Repository\ProductRepository::findIn">findIn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ProductRepository.php.html#57"><abbr title="Src\Repository\ProductRepository::findAll">findAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ProductTypeRepository.php.html#13"><abbr title="Src\Repository\ProductTypeRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ProductTypeRepository.php.html#19"><abbr title="Src\Repository\ProductTypeRepository::createModelInstance">createModelInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ProductTypeRepository.php.html#24"><abbr title="Src\Repository\ProductTypeRepository::getTableName">getTableName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ProductTypeRepository.php.html#35"><abbr title="Src\Repository\ProductTypeRepository::hasProductsForType">hasProductsForType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleDetailsRepository.php.html#12"><abbr title="Src\Repository\SaleDetailsRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleDetailsRepository.php.html#19"><abbr title="Src\Repository\SaleDetailsRepository::createModelInstance">createModelInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleDetailsRepository.php.html#24"><abbr title="Src\Repository\SaleDetailsRepository::getTableName">getTableName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleDetailsRepository.php.html#36"><abbr title="Src\Repository\SaleDetailsRepository::findBySaleId">findBySaleId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleDetailsRepository.php.html#41"><abbr title="Src\Repository\SaleDetailsRepository::deleteBySaleId">deleteBySaleId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleRepository.php.html#12"><abbr title="Src\Repository\SaleRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleRepository.php.html#20"><abbr title="Src\Repository\SaleRepository::createModelInstance">createModelInstance</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleRepository.php.html#25"><abbr title="Src\Repository\SaleRepository::getTableName">getTableName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleRepository.php.html#36"><abbr title="Src\Repository\SaleRepository::createSale">createSale</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleRepository.php.html#65"><abbr title="Src\Repository\SaleRepository::findAllWithDetails">findAllWithDetails</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleRepository.php.html#97"><abbr title="Src\Repository\SaleRepository::findByIdWithDetails">findByIdWithDetails</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/SaleRepository.php.html#132"><abbr title="Src\Repository\SaleRepository::deleteSale">deleteSale</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SaleController.php.html#25"><abbr title="Src\Controller\SaleController::new">new</abbr></a></td><td class="text-right">57%</td></tr>
+       <tr><td><a href="Controller/SaleController.php.html#81"><abbr title="Src\Controller\SaleController::findAll">findAll</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Controller/AbstractController.php.html#20"><abbr title="Src\Controller\AbstractController::validateInput">validateInput</abbr></a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="Controller/ProductController.php.html#81"><abbr title="Src\Controller\ProductController::update">update</abbr></a></td><td class="text-right">85%</td></tr>
+       <tr><td><a href="Controller/ProductController.php.html#25"><abbr title="Src\Controller\ProductController::new">new</abbr></a></td><td class="text-right">85%</td></tr>
+       <tr><td><a href="Controller/ProductTypeController.php.html#64"><abbr title="Src\Controller\ProductTypeController::update">update</abbr></a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Repository/AbstractRepository.php.html#130"><abbr title="Src\Repository\AbstractRepository::bulkCreate">bulkCreate</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Controller/AbstractController.php.html#20"><abbr title="Src\Controller\AbstractController::validateInput">validateInput</abbr></a></td><td class="text-right">21</td></tr>
+       <tr><td><a href="Repository/SaleRepository.php.html#36"><abbr title="Src\Repository\SaleRepository::createSale">createSale</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Model/AbstractModel.php.html#55"><abbr title="Src\Model\AbstractModel::toArray">toArray</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#103"><abbr title="Src\Repository\AbstractRepository::create">create</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#159"><abbr title="Src\Repository\AbstractRepository::update">update</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/ProductController.php.html#81"><abbr title="Src\Controller\ProductController::update">update</abbr></a></td><td class="text-right">11</td></tr>
+       <tr><td><a href="Controller/SaleController.php.html#25"><abbr title="Src\Controller\SaleController::new">new</abbr></a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="Controller/ProductTypeController.php.html#64"><abbr title="Src\Controller\ProductTypeController::update">update</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Model/AbstractModel.php.html#19"><abbr title="Src\Model\AbstractModel::__get">__get</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#43"><abbr title="Src\Repository\AbstractRepository::findById">findById</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/AbstractRepository.php.html#64"><abbr title="Src\Repository\AbstractRepository::findAll">findAll</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/ProductRepository.php.html#36"><abbr title="Src\Repository\ProductRepository::findIn">findIn</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/ProductRepository.php.html#57"><abbr title="Src\Repository\ProductRepository::findAll">findAll</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/ProductTypeRepository.php.html#35"><abbr title="Src\Repository\ProductTypeRepository::hasProductsForType">hasProductsForType</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/SaleRepository.php.html#132"><abbr title="Src\Repository\SaleRepository::deleteSale">deleteSale</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controller/ProductController.php.html#25"><abbr title="Src\Controller\ProductController::new">new</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Controller/SaleController.php.html#81"><abbr title="Src\Controller\SaleController::findAll">findAll</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 11.0.5</a> using <a href="https://www.php.net/" target="_top">PHP 8.2.19</a> and <a href="https://phpunit.de/">PHPUnit 11.2.7</a> at Wed Jul 17 12:33:26 UTC 2024.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/jquery.min.js?v=11.0.5" type="text/javascript"></script>
+  <script src="_js/d3.min.js?v=11.0.5" type="text/javascript"></script>
+  <script src="_js/nv.d3.min.js?v=11.0.5" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([5,0,0,0,0,0,1,1,0,2,1,5], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([33,0,0,0,0,0,1,1,0,4,0,20], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[82.97872340425532,22,"<a href=\"Controller\/AbstractController.php.html#8\">Src\\Controller\\AbstractController<\/a>"],[87.03703703703704,20,"<a href=\"Controller\/ProductController.php.html#12\">Src\\Controller\\ProductController<\/a>"],[94.5945945945946,13,"<a href=\"Controller\/ProductTypeController.php.html#10\">Src\\Controller\\ProductTypeController<\/a>"],[63.26530612244898,11,"<a href=\"Controller\/SaleController.php.html#12\">Src\\Controller\\SaleController<\/a>"],[100,1,"<a href=\"Exception\/ApiException.php.html#13\">Src\\Exception\\ApiException<\/a>"],[58.82352941176471,14,"<a href=\"Model\/AbstractModel.php.html#10\">Src\\Model\\AbstractModel<\/a>"],[100,0,"<a href=\"Model\/Product.php.html#5\">Src\\Model\\Product<\/a>"],[100,0,"<a href=\"Model\/ProductType.php.html#5\">Src\\Model\\ProductType<\/a>"],[100,0,"<a href=\"Model\/Sale.php.html#7\">Src\\Model\\Sale<\/a>"],[100,0,"<a href=\"Model\/SaleDetails.php.html#7\">Src\\Model\\SaleDetails<\/a>"],[0,19,"<a href=\"Repository\/AbstractRepository.php.html#12\">Src\\Repository\\AbstractRepository<\/a>"],[0,7,"<a href=\"Repository\/ProductRepository.php.html#10\">Src\\Repository\\ProductRepository<\/a>"],[0,5,"<a href=\"Repository\/ProductTypeRepository.php.html#10\">Src\\Repository\\ProductTypeRepository<\/a>"],[0,5,"<a href=\"Repository\/SaleDetailsRepository.php.html#10\">Src\\Repository\\SaleDetailsRepository<\/a>"],[0,11,"<a href=\"Repository\/SaleRepository.php.html#9\">Src\\Repository\\SaleRepository<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[81.3953488372093,19,"<a href=\"Controller\/AbstractController.php.html#20\">Src\\Controller\\AbstractController::validateInput<\/a>"],[100,1,"<a href=\"Controller\/AbstractController.php.html#91\">Src\\Controller\\AbstractController::isValidJson<\/a>"],[100,2,"<a href=\"Controller\/AbstractController.php.html#103\">Src\\Controller\\AbstractController::isValidDate<\/a>"],[100,1,"<a href=\"Controller\/ProductController.php.html#15\">Src\\Controller\\ProductController::__construct<\/a>"],[85.71428571428571,5,"<a href=\"Controller\/ProductController.php.html#25\">Src\\Controller\\ProductController::new<\/a>"],[100,1,"<a href=\"Controller\/ProductController.php.html#60\">Src\\Controller\\ProductController::findAllWithDetails<\/a>"],[100,1,"<a href=\"Controller\/ProductController.php.html#70\">Src\\Controller\\ProductController::findById<\/a>"],[85.18518518518519,11,"<a href=\"Controller\/ProductController.php.html#81\">Src\\Controller\\ProductController::update<\/a>"],[100,1,"<a href=\"Controller\/ProductController.php.html#135\">Src\\Controller\\ProductController::delete<\/a>"],[100,1,"<a href=\"Controller\/ProductTypeController.php.html#13\">Src\\Controller\\ProductTypeController::__construct<\/a>"],[100,2,"<a href=\"Controller\/ProductTypeController.php.html#23\">Src\\Controller\\ProductTypeController::new<\/a>"],[100,1,"<a href=\"Controller\/ProductTypeController.php.html#43\">Src\\Controller\\ProductTypeController::findAll<\/a>"],[100,1,"<a href=\"Controller\/ProductTypeController.php.html#53\">Src\\Controller\\ProductTypeController::findById<\/a>"],[88.88888888888889,6,"<a href=\"Controller\/ProductTypeController.php.html#64\">Src\\Controller\\ProductTypeController::update<\/a>"],[100,2,"<a href=\"Controller\/ProductTypeController.php.html#103\">Src\\Controller\\ProductTypeController::delete<\/a>"],[100,1,"<a href=\"Controller\/SaleController.php.html#15\">Src\\Controller\\SaleController::__construct<\/a>"],[57.89473684210527,6,"<a href=\"Controller\/SaleController.php.html#25\">Src\\Controller\\SaleController::new<\/a>"],[66.66666666666666,2,"<a href=\"Controller\/SaleController.php.html#81\">Src\\Controller\\SaleController::findAll<\/a>"],[100,1,"<a href=\"Controller\/SaleController.php.html#97\">Src\\Controller\\SaleController::findById<\/a>"],[100,1,"<a href=\"Controller\/SaleController.php.html#108\">Src\\Controller\\SaleController::delete<\/a>"],[100,1,"<a href=\"Exception\/ApiException.php.html#23\">Src\\Exception\\ApiException::__construct<\/a>"],[0,2,"<a href=\"Model\/AbstractModel.php.html#19\">Src\\Model\\AbstractModel::__get<\/a>"],[100,2,"<a href=\"Model\/AbstractModel.php.html#37\">Src\\Model\\AbstractModel::__set<\/a>"],[0,3,"<a href=\"Model\/AbstractModel.php.html#55\">Src\\Model\\AbstractModel::toArray<\/a>"],[0,1,"<a href=\"Model\/AbstractModel.php.html#72\">Src\\Model\\AbstractModel::camelToSnake<\/a>"],[100,1,"<a href=\"Model\/AbstractModel.php.html#76\">Src\\Model\\AbstractModel::snakeToCamel<\/a>"],[100,5,"<a href=\"Model\/AbstractModel.php.html#87\">Src\\Model\\AbstractModel::convertType<\/a>"],[0,1,"<a href=\"Repository\/AbstractRepository.php.html#17\">Src\\Repository\\AbstractRepository::__construct<\/a>"],[100,0,"<a href=\"Repository\/AbstractRepository.php.html#26\">Src\\Repository\\AbstractRepository::createModelInstance<\/a>"],[100,0,"<a href=\"Repository\/AbstractRepository.php.html#33\">Src\\Repository\\AbstractRepository::getTableName<\/a>"],[0,2,"<a href=\"Repository\/AbstractRepository.php.html#43\">Src\\Repository\\AbstractRepository::findById<\/a>"],[0,2,"<a href=\"Repository\/AbstractRepository.php.html#64\">Src\\Repository\\AbstractRepository::findAll<\/a>"],[0,1,"<a href=\"Repository\/AbstractRepository.php.html#85\">Src\\Repository\\AbstractRepository::findByColumn<\/a>"],[0,3,"<a href=\"Repository\/AbstractRepository.php.html#103\">Src\\Repository\\AbstractRepository::create<\/a>"],[0,5,"<a href=\"Repository\/AbstractRepository.php.html#130\">Src\\Repository\\AbstractRepository::bulkCreate<\/a>"],[0,3,"<a href=\"Repository\/AbstractRepository.php.html#159\">Src\\Repository\\AbstractRepository::update<\/a>"],[0,1,"<a href=\"Repository\/AbstractRepository.php.html#192\">Src\\Repository\\AbstractRepository::delete<\/a>"],[0,1,"<a href=\"Repository\/AbstractRepository.php.html#211\">Src\\Repository\\AbstractRepository::deleteByColumn<\/a>"],[0,1,"<a href=\"Repository\/ProductRepository.php.html#13\">Src\\Repository\\ProductRepository::__construct<\/a>"],[0,1,"<a href=\"Repository\/ProductRepository.php.html#20\">Src\\Repository\\ProductRepository::createModelInstance<\/a>"],[0,1,"<a href=\"Repository\/ProductRepository.php.html#25\">Src\\Repository\\ProductRepository::getTableName<\/a>"],[0,2,"<a href=\"Repository\/ProductRepository.php.html#36\">Src\\Repository\\ProductRepository::findIn<\/a>"],[0,2,"<a href=\"Repository\/ProductRepository.php.html#57\">Src\\Repository\\ProductRepository::findAll<\/a>"],[0,1,"<a href=\"Repository\/ProductTypeRepository.php.html#13\">Src\\Repository\\ProductTypeRepository::__construct<\/a>"],[0,1,"<a href=\"Repository\/ProductTypeRepository.php.html#19\">Src\\Repository\\ProductTypeRepository::createModelInstance<\/a>"],[0,1,"<a href=\"Repository\/ProductTypeRepository.php.html#24\">Src\\Repository\\ProductTypeRepository::getTableName<\/a>"],[0,2,"<a href=\"Repository\/ProductTypeRepository.php.html#35\">Src\\Repository\\ProductTypeRepository::hasProductsForType<\/a>"],[0,1,"<a href=\"Repository\/SaleDetailsRepository.php.html#12\">Src\\Repository\\SaleDetailsRepository::__construct<\/a>"],[0,1,"<a href=\"Repository\/SaleDetailsRepository.php.html#19\">Src\\Repository\\SaleDetailsRepository::createModelInstance<\/a>"],[0,1,"<a href=\"Repository\/SaleDetailsRepository.php.html#24\">Src\\Repository\\SaleDetailsRepository::getTableName<\/a>"],[0,1,"<a href=\"Repository\/SaleDetailsRepository.php.html#36\">Src\\Repository\\SaleDetailsRepository::findBySaleId<\/a>"],[0,1,"<a href=\"Repository\/SaleDetailsRepository.php.html#41\">Src\\Repository\\SaleDetailsRepository::deleteBySaleId<\/a>"],[0,1,"<a href=\"Repository\/SaleRepository.php.html#12\">Src\\Repository\\SaleRepository::__construct<\/a>"],[0,1,"<a href=\"Repository\/SaleRepository.php.html#20\">Src\\Repository\\SaleRepository::createModelInstance<\/a>"],[0,1,"<a href=\"Repository\/SaleRepository.php.html#25\">Src\\Repository\\SaleRepository::getTableName<\/a>"],[0,4,"<a href=\"Repository\/SaleRepository.php.html#36\">Src\\Repository\\SaleRepository::createSale<\/a>"],[0,1,"<a href=\"Repository\/SaleRepository.php.html#65\">Src\\Repository\\SaleRepository::findAllWithDetails<\/a>"],[0,1,"<a href=\"Repository\/SaleRepository.php.html#97\">Src\\Repository\\SaleRepository::findByIdWithDetails<\/a>"],[0,2,"<a href=\"Repository\/SaleRepository.php.html#132\">Src\\Repository\\SaleRepository::deleteSale<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
