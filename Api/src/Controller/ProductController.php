@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Src\Controller;
 
 use Exception;
+use Src\Exception\ApiException;
 use Src\Model\{Product};
 use Src\Repository\{ProductRepository, ProductTypeRepository};
 
@@ -32,13 +33,17 @@ class ProductController extends AbstractController
 
         $postData = $this->validateInput(null, $rules);
 
+        if ($postData['name'] === '') {
+            throw new ApiException('O nome deve ser informado', 400);
+        }
+
         if ($postData['price'] < 0) {
-            throw new Exception('O preço deve ser positivo');
+            throw new ApiException('O preço deve ser positivo', 400);
         }
 
         $productType = $this->productTypeRepository->findById($postData['type_id'], true);
         if (!$productType) {
-            throw new Exception('Nao foi possivel encontrar o tipo de produto selecionado');
+            throw new ApiException('Nao foi possivel encontrar o tipo de produto selecionado', 400);
         }
 
         $product = new Product();
@@ -53,11 +58,6 @@ class ProductController extends AbstractController
     }
 
     public function findAllWithDetails(): array
-    {
-        return $this->productRepository->findAll();
-    }
-
-    public function findAll(): array
     {
         return $this->productRepository->findAll();
     }
@@ -81,7 +81,7 @@ class ProductController extends AbstractController
     public function update(array $args): bool
     {
         if (empty($args['PUT'])) {
-            throw new Exception('Não foi possível atualizar o produto');
+            throw new ApiException('Não foi possível atualizar o produto', 400);
         }
 
         $rules = [
@@ -95,13 +95,13 @@ class ProductController extends AbstractController
         $arguments = $this->validateInput(['id' => $args['id'], ...$args['PUT']], $rules);
 
         if ($arguments['id'] < 0) {
-            throw new Exception('Não foi possível atualizar o produto');
+            throw new ApiException('Não foi possível atualizar o produto', 400);
         }
 
         /** @var ?Product $product */
         $product = $this->productRepository->findById($arguments['id'], true);
         if (!$product) {
-            throw new Exception('Não foi possível atualizar o produto');
+            throw new ApiException('Não foi possível atualizar o produto', 400);
         }
 
         if (isset($arguments['name'])) {
@@ -115,7 +115,7 @@ class ProductController extends AbstractController
         if (isset($arguments['type_id']) && $arguments['type_id'] > 0) {
             $productType = $this->productTypeRepository->findById($arguments['type_id'], true);
             if (!$productType) {
-                throw new Exception('Não foi possível encontrar o tipo de produto');
+                throw new ApiException('Não foi possível encontrar o tipo de produto', 400);
             }
             $product->typeId = $arguments['type_id'];
         }

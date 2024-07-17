@@ -3,6 +3,7 @@
 namespace Src\Controller;
 
 use Exception;
+use Src\Exception\ApiException;
 use Src\Model\ProductType;
 use Src\Repository\ProductTypeRepository;
 
@@ -16,9 +17,10 @@ class ProductTypeController extends AbstractController
     }
 
     /**
+     * @return int|null
      * @throws Exception
      */
-    public function new(): int
+    public function new(): ?int
     {
         $rules = [
             'name' => ['type' => 'string', 'required' => true],
@@ -26,6 +28,10 @@ class ProductTypeController extends AbstractController
         ];
 
         $postData = $this->validateInput(null, $rules);
+
+        if ($postData['tax_percentage'] < 0) {
+            throw new ApiException('O valor do imposto deve ser positivo', 400);
+        }
 
         $productType = new ProductType();
         $productType->taxPercentage = $postData['tax_percentage'];
@@ -58,7 +64,7 @@ class ProductTypeController extends AbstractController
     public function update(array $args): bool
     {
         if (empty($args['PUT'])) {
-            throw new Exception('Não foi possível atualizar o tipo de produto');
+            throw new ApiException('Não foi possível atualizar o tipo de produto', 400);
         }
 
         $rules = [
@@ -72,7 +78,7 @@ class ProductTypeController extends AbstractController
         /** @var ?ProductType $productType */
         $productType = $this->productTypeRepository->findById($arguments['id'], true);
         if (!$productType) {
-            throw new Exception('Nao foi possivel encontrar o tipo de produto');
+            throw new ApiException('Nao foi possivel encontrar o tipo de produto', 400);
         }
 
         if (isset($arguments['name'])) {
@@ -81,7 +87,7 @@ class ProductTypeController extends AbstractController
 
         if (isset($arguments['tax_percentage'])) {
             if ($arguments['tax_percentage'] < 0) {
-                throw new Exception('Taxa deve ser maior que zero');
+                throw new ApiException('Taxa deve ser maior que zero', 400);
             }
             $productType->taxPercentage = $arguments['tax_percentage'];
         }
@@ -98,7 +104,7 @@ class ProductTypeController extends AbstractController
     {
         $arguments = $this->validateInput($args, ['id' => ['type' => 'int', 'required' => true]]);
         if ($this->productTypeRepository->hasProductsForType($arguments['id'])) {
-            throw new Exception('Não é possivel excluir um tipo de produto que contém produtos relacionados');
+            throw new ApiException('Não é possivel excluir um tipo de produto que contém produtos relacionados', 400);
         }
 
         return $this->productTypeRepository->delete($arguments['id']);

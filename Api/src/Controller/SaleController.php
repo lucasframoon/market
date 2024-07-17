@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Src\Controller;
 
 use Exception;
-use Src\Model\{Sales, SalesDetails};
+use Src\Exception\ApiException;
+use Src\Model\{Sale, SaleDetails};
 use Src\Repository\{ProductRepository, SaleRepository};
 
 class SaleController extends AbstractController
@@ -30,7 +31,7 @@ class SaleController extends AbstractController
 
         $postData = $this->validateInput(null, $rules);
         if (empty($postData['products']) || !is_array($postData['products'])) {
-            throw new Exception('Adicione os itens da venda');
+            throw new ApiException('Adicione os itens da venda', 400);
         }
 
         $arraySalesDetails = [];
@@ -41,7 +42,7 @@ class SaleController extends AbstractController
 
         foreach ($postData['products'] as $product) {
             if (!isset($product['product_id'], $product['quantity'])) {
-                throw new Exception('Dados dos produtos inválidos');
+                throw new ApiException('Dados dos produtos inválidos', 400);
             }
             $productQuantities[$product['product_id']] = $product['quantity'];
             $productsIds[] = $product['product_id'];
@@ -61,7 +62,7 @@ class SaleController extends AbstractController
             $totalAmount += $productTotalAmount;
             $totalTax += $productTaxAmount;
 
-            $salesDetails = new SalesDetails();
+            $salesDetails = new SaleDetails();
             $salesDetails->productId = $productId;
             $salesDetails->quantity = $quantity;
             $salesDetails->price = $price;
@@ -69,7 +70,7 @@ class SaleController extends AbstractController
             $arraySalesDetails[] = $salesDetails;
         }
 
-        $sale = new Sales();
+        $sale = new Sale();
         $sale->saleDate = $postData['sale_date'];
         $sale->totalAmount = $totalAmount;
         $sale->totalTax = $totalTax;
@@ -97,12 +98,6 @@ class SaleController extends AbstractController
     {
         $arguments = $this->validateInput($args, ['id' => ['type' => 'int', 'required' => true]]);
         return $this->saleRepository->findByIdWithDetails($arguments['id']);
-    }
-
-    //TODO implement update
-    public function update(array $args): bool
-    {
-        throw new Exception("Método 'update' não implementado");
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace Src\Controller;
 
 use DateTime;
-use Exception;
+use Src\Exception\ApiException;
 
 class AbstractController
 {
@@ -14,7 +14,7 @@ class AbstractController
      * @param array|null $data if null, $_POST will be used
      * @param array $rules
      * @return array
-     * @throws Exception
+     * @throws ApiException
      * @example validatePostData( $data,['name' => ['type' => 'string', 'required' => true]])
      */
     protected function validateInput(?array $data, array $rules): array
@@ -30,7 +30,7 @@ class AbstractController
             // Check if the value is required and missing
             if (!isset($value)) {
                 if (isset($rule['required']) && $rule['required']) {
-                    throw new Exception("Parametro '" . $field . "' é obrigatório");
+                    throw new ApiException("Parametro '" . $field . "' é obrigatório", 400);
                 }
                 $validatedData[$field] = null;
                 continue;
@@ -43,37 +43,37 @@ class AbstractController
             switch ($rule['type']) {
                 case 'int':
                     if (!filter_var($value, FILTER_VALIDATE_INT)) {
-                        throw new Exception("Parametro '" . $field . "' deve ser um número inteiro");
+                        throw new ApiException("Parametro '" . $field . "' deve ser um número inteiro", 400);
                     }
                     $validatedData[$field] = (int)$value;
                     break;
                 case 'float':
                     if (!filter_var($value, FILTER_VALIDATE_FLOAT)) {
-                        throw new Exception("Parametro '" . $field . "' deve ser um número decimal");
+                        throw new ApiException("Parametro '" . $field . "' deve ser um número decimal", 400);
                     }
                     $validatedData[$field] = (float)$value;
                     break;
                 case 'bool':
                     if (!is_bool(filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE))) {
-                        throw new Exception("Parametro '" . $field . "' deve ser um booleano");
+                        throw new ApiException("Parametro '" . $field . "' deve ser um booleano", 400);
                     }
                     $validatedData[$field] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
                     break;
                 case 'json':
                     if (!$this->isValidJson($value)) {
-                        throw new Exception("Parametro '" . $field . "' deve ser um JSON válido");
+                        throw new ApiException("Parametro '" . $field . "' deve ser um JSON válido", 400);
                     }
                     $validatedData[$field] = json_decode($value, true);
                     break;
                 case 'date':
                     if (!$this->isValidDate($value)) {
-                        throw new Exception("Parametro '" . $field . "' deve ser uma data válida");
+                        throw new ApiException("Parametro '" . $field . "' deve ser uma data válida", 400);
                     }
                     $validatedData[$field] = $value;
                     break;
                 default:
                     if (!is_string($value)) {
-                        throw new Exception("Parametro '" . $field . "' inválido");
+                        throw new ApiException("Parametro '" . $field . "' inválido", 400);
                     }
                     $validatedData[$field] = $value;
                     break;

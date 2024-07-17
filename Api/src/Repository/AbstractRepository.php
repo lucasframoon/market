@@ -6,6 +6,7 @@ namespace Src\Repository;
 
 use Exception;
 use PDO;
+use Src\Exception\ApiException;
 use Src\Model\AbstractModel;
 
 abstract class AbstractRepository
@@ -144,7 +145,7 @@ abstract class AbstractRepository
             }
         } catch (Exception $e) {
             $this->pdo->rollBack();
-            throw $e;
+            throw new ApiException('Failed to create data', 500, 0, $e);
         }
         return $lastInsertIds;
     }

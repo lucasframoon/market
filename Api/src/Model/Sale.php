@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Model;
 
-class Sales extends AbstractModel
+class Sale extends AbstractModel
 {
     protected  int $id = 0;
     protected  string $saleDate = '';
