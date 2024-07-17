@@ -11,7 +11,7 @@ const UpdateButton = ({ path, id }) => {
     }
     
     return (
-        <Button variant='info' onClick={handleClick} style={{ marginRight: '10px' }}>
+        <Button variant='info' onClick={handleClick} style={{ marginRight: '10px', width: '4.5rem' }}>
             Editar
         </Button>
     );

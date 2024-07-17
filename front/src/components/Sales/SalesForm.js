@@ -212,7 +212,7 @@ function SalesForm() {
                     </Col>
                 </Row>
                 <Button variant="primary" type="submit" className="mt-3">
-                    Finalizar Venda
+                    Registrar Venda
                 </Button>
             </Form>
         </div>

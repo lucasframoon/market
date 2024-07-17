@@ -4,6 +4,9 @@ import {useNavigate, useParams} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Alert from "../Alerts/Alert";
 import BackButton from "../Buttons/BackButton";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 const ProductForm = () => {
     const {id} = useParams();
@@ -87,64 +90,75 @@ const ProductForm = () => {
             {successAlertMessage && <Alert message={successAlertMessage} variant='primary'/>}
             {errorAlertMessage && <Alert message={errorAlertMessage} variant='danger'/>}
             <h1>{id ? "Editar Produto" : "Novo Produto"}</h1>
-            <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className="buttons" style={{display: 'flex', justifyContent: 'space-between'}}>
                 <BackButton path="/products"/>
             </div>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Nome</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="price" className="form-label">Preço</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="price"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="type" className="form-label">Tipo de Produto</label>
-                    <Form.Select
-                        id="type"
-                        aria-label="Tipo de Produto"
-                        value={typeId}
-                        onChange={(e) => setTypeId(e.target.value)}
-                        required
-                    >
-                        <option value="">Selecione um tipo</option>
-                        {productTypes.map(type => (
-                            <option key={type.id} value={type.id}>
-                                {type.name}
-                            </option>
-                        ))}
-                    </Form.Select>
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="description" className="form-label">Descrição</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary">Salvar</button>
-            </form>
+            <Form onSubmit={handleSubmit}>
+                <Row className="mb-3">
+                    <Col>
+                        <Form.Group controlId="name">
+                            <Form.Label>Nome</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col>
+                        <Form.Group controlId="price">
+                            <Form.Label>Preço</Form.Label>
+                            <Form.Control
+                                type="number"
+                                step="0.01"
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col>
+                        <Form.Group controlId="type">
+                            <Form.Label>Tipo de Produto</Form.Label>
+                            <Form.Select
+                                id="type"
+                                aria-label="Tipo de Produto"
+                                value={typeId}
+                                onChange={(e) => setTypeId(e.target.value)}
+                                required
+                            >
+                                <option value="">Selecione um tipo</option>
+                                {productTypes.map(type => (
+                                    <option key={type.id} value={type.id}>
+                                        {type.name}
+                                    </option>
+                                ))}
+                            </Form.Select>
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col>
+                        <Form.Group controlId="description">
+                            <Form.Label>Descrição</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Button variant="primary" type="submit" className="mt-3">
+                    Salvar
+                </Button>
+            </Form>
         </div>
     );
 };

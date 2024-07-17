@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap';
 
 const DeleteButton = ({ handleClick }) => {
     return (
-        <Button variant='danger' onClick={handleClick}>
+        <Button variant='danger' onClick={handleClick} style={{width: '4.5rem' }}>
             Excluir
         </Button>
     );
