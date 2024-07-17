@@ -6,3 +6,4 @@ Api/vendor/
 /Api/node_modules/
 /front/node_modules/
 /node_modules/
+/Api/.phpunit.cache/
