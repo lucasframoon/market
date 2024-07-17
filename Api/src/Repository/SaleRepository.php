@@ -4,7 +4,7 @@ namespace Src\Repository;
 
 use Exception;
 use PDO;
-use Src\Model\{Sales, SalesDetails};
+use Src\Model\{Sale, SaleDetails};
 
 class SaleRepository extends AbstractRepository
 {
@@ -17,9 +17,9 @@ class SaleRepository extends AbstractRepository
         parent::__construct($pdo);
     }
 
-    protected function createModelInstance(): Sales
+    protected function createModelInstance(): Sale
     {
-        return new Sales;
+        return new Sale;
     }
 
     protected function getTableName(): string
@@ -28,12 +28,12 @@ class SaleRepository extends AbstractRepository
     }
 
     /**
-     * @param Sales $sale
-     * @param array<SalesDetails> $salesDetails
+     * @param Sale $sale
+     * @param array<SaleDetails> $salesDetails
      * @return bool
      * @throws Exception
      */
-    public function createSale(Sales $sale, array $salesDetails): bool {
+    public function createSale(Sale $sale, array $salesDetails): bool {
         try {
             $this->pdo->beginTransaction();
 

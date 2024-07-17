@@ -5,43 +5,45 @@ declare(strict_types=1);
 namespace Src\Controller;
 
 use Exception;
-use Src\Model\{Sales, SalesDetails};
+use Src\Exception\ApiException;
+use Src\Model\{Sale, SaleDetails};
 use Src\Repository\{ProductRepository, SaleRepository};
 
 class SaleController extends AbstractController
 {
 
     public function __construct(
-        private readonly SaleRepository        $saleRepository,
-        private readonly ProductRepository     $productRepository
+        private readonly SaleRepository    $saleRepository,
+        private readonly ProductRepository $productRepository
     )
     {
     }
 
+    /**
+     * @throws Exception
+     */
     public function new(): bool
     {
+        $rules = [
+            'products' => ['type' => 'json', 'required' => true],
+            'sale_date' => ['type' => 'date', 'required' => true]
+        ];
 
-        //TODO post data validation
-
-        $postProducts = $_POST['products'] ?? null;
-        $saleDate = $_POST['sale_date'] ?? null;
-
-        if (is_null($postProducts)) {
-            throw new Exception('Adicione os itens da venda');
-        }
-
-        $postProducts = json_decode($postProducts, true);
-        if (empty($postProducts)) {
-            throw new Exception('Adicione os itens da venda');
+        $postData = $this->validateInput(null, $rules);
+        if (empty($postData['products']) || !is_array($postData['products'])) {
+            throw new ApiException('Adicione os itens da venda', 400);
         }
 
         $arraySalesDetails = [];
         $totalAmount = 0;
         $totalTax = 0;
-
         $productQuantities = [];
         $productsIds = [];
-        foreach ($postProducts as $product) {
+
+        foreach ($postData['products'] as $product) {
+            if (!isset($product['product_id'], $product['quantity'])) {
+                throw new ApiException('Dados dos produtos inválidos', 400);
+            }
             $productQuantities[$product['product_id']] = $product['quantity'];
             $productsIds[] = $product['product_id'];
         }
@@ -51,7 +53,7 @@ class SaleController extends AbstractController
         foreach ($productsInfo as $product) {
             $productId = $product['id'];
             $price = $product['price'];
-            $taxPercentage  = $product['tax_percentage'];
+            $taxPercentage = $product['tax_percentage'];
             $quantity = $productQuantities[$productId];
 
             $productTotalAmount = $price * $quantity;
@@ -60,7 +62,7 @@ class SaleController extends AbstractController
             $totalAmount += $productTotalAmount;
             $totalTax += $productTaxAmount;
 
-            $salesDetails = new SalesDetails();
+            $salesDetails = new SaleDetails();
             $salesDetails->productId = $productId;
             $salesDetails->quantity = $quantity;
             $salesDetails->price = $price;
@@ -68,8 +70,8 @@ class SaleController extends AbstractController
             $arraySalesDetails[] = $salesDetails;
         }
 
-        $sale = new Sales();
-        $sale->saleDate = $saleDate;
+        $sale = new Sale();
+        $sale->saleDate = $postData['sale_date'];
         $sale->totalAmount = $totalAmount;
         $sale->totalTax = $totalTax;
 
@@ -94,18 +96,8 @@ class SaleController extends AbstractController
      */
     public function findById(array $args): array
     {
-        //TODO id validation
-        if (!$id = $args['id'] ?? null) {
-            throw new Exception('Parametro id não pode ser vazio');
-        }
-
-        return $this->saleRepository->findByIdWithDetails((int)$id);
-    }
-
-    //TODO implement update
-    public function update(array $args): bool
-    {
-        return false;
+        $arguments = $this->validateInput($args, ['id' => ['type' => 'int', 'required' => true]]);
+        return $this->saleRepository->findByIdWithDetails($arguments['id']);
     }
 
     /**
@@ -115,11 +107,7 @@ class SaleController extends AbstractController
      */
     public function delete(array $args): bool
     {
-        //TODO id validation
-        if (!$id = $args['id'] ?? null) {
-            throw new Exception('Parametro id não pode ser vazio');
-        }
-
-        return $this->saleRepository->deleteSale((int)$id);
+        $arguments = $this->validateInput($args, ['id' => ['type' => 'int', 'required' => true]]);
+        return $this->saleRepository->deleteSale($arguments['id']);
     }
 }

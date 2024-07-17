@@ -5,6 +5,7 @@ import NewButton from "../Buttons/NewButton";
 import BackButton from "../Buttons/BackButton";
 import UpdateButton from "../Buttons/UpdateButton";
 import DeleteButton from "../Buttons/DeleteButton";
+import {Table} from "react-bootstrap";
 
 function ProductTypes() {
     const [productTypes, setProductTypes] = useState([]);
@@ -48,16 +49,16 @@ function ProductTypes() {
             {successAlertMessage && <Alert message={successAlertMessage} variant='primary'/>}
             {errorAlertMessage && <Alert message={errorAlertMessage} variant='danger'/>}
             <h1 className="mt-5">Tipos de produtos</h1>
-            <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className="buttons" style={{display: 'flex', justifyContent: 'space-between'}}>
                 <BackButton path="/"/>
-                <NewButton path="/product-type/form" />
+                <NewButton path="/product-type/form"/>
             </div>
-            <table className="table table-striped mt-3">
+            <Table striped bordered hover className="mt-3">
                 <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Taxa</th>
-                    <th>Ações</th>
+                    <th style={{width: '30%'}}>Nome</th>
+                    <th style={{width: '30%'}}>Taxa</th>
+                    <th style={{width: '10%'}}>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,13 +67,13 @@ function ProductTypes() {
                         <td>{type.name}</td>
                         <td>{type.tax_percentage}%</td>
                         <td>
-                            <UpdateButton path='/product-type/form' id={type.id} />
-                            <DeleteButton handleClick={() => handleDeleteClick(type.id)} />
+                            <UpdateButton path='/product-type/form' id={type.id}/>
+                            <DeleteButton handleClick={() => handleDeleteClick(type.id)}/>
                         </td>
                     </tr>
                 ))}
                 </tbody>
-            </table>
+            </Table>
         </div>
     );
 }

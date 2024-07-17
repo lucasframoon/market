@@ -76,8 +76,8 @@ switch ($routeInfo[0]) {
             $response = $controller->$method($vars);
             echo json_encode($response);
         } catch (Exception $e) {
-//            http_response_code(500);
-            echo json_encode(['message' => $e->getMessage()]);
+          http_response_code($e->statusCode ?? 500);
+          echo json_encode(['message' => $e->getMessage()]);
         }
         exit;
     default:

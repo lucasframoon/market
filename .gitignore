@@ -2,7 +2,7 @@ composer.phar
 Api/vendor/
 .idea/
 .vscode/
-*.env
 /Api/node_modules/
 /front/node_modules/
 /node_modules/
+/Api/.phpunit.cache/

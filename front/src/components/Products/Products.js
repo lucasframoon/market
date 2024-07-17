@@ -5,6 +5,7 @@ import NewButton from "../Buttons/NewButton";
 import BackButton from '../Buttons/BackButton';
 import UpdateButton from "../Buttons/UpdateButton";
 import DeleteButton from "../Buttons/DeleteButton";
+import {Table} from "react-bootstrap";
 
 function Products() {
     const [products, setProducts] = useState([]);
@@ -13,32 +14,23 @@ function Products() {
     const [errorAlertMessage, setErrorAlertMessage] = useState(null);
 
     useEffect(() => {
-        let isMounted = true;
         axios.get('http://localhost:8080/product/list')
             .then(response => {
-                if (isMounted) {
-                    setProducts(response.data);
-                }
+                setProducts(response.data);
             })
             .catch(error => {
-                if (isMounted) {
-                    setErrorAlertMessage("Erro ao carregar os dados");
-                }
+                setErrorAlertMessage('Erro ao carregar os dados');
                 console.error('Error fetching products:', error);
             });
-
-        return () => {
-            isMounted = false;
-        };
     }, []);
 
     const handleDeleteClick = async (id) => {
         try {
             await axios.delete(`http://localhost:8080/product/${id}`);
             setProducts(prev => prev.filter(type => type.id !== id));
-            setSuccessAlertMessage("Deletado com sucesso");
+            setSuccessAlertMessage('Deletado com sucesso');
         } catch (error) {
-            setErrorAlertMessage("Erro ao deletar o produto");
+            setErrorAlertMessage('Erro ao deletar o produto');
             console.error('Error deleting product:', error);
         }
     };
@@ -52,15 +44,15 @@ function Products() {
                 <BackButton path="/"/>
                 <NewButton path="/product/form" />
             </div>
-            <table className="table table-striped mt-3">
+            <Table striped bordered hover className="mt-3">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Preço</th>
-                    <th>Tipo</th>
-                    <th>Descrição</th>
-                    <th>Ações</th>
+                    <th style={{ width: '3%' }}>#</th>
+                    <th style={{ width: '12%' }}>Nome</th>
+                    <th style={{ width: '8%' }}>Preço</th>
+                    <th style={{ width: '10%' }}>Tipo</th>
+                    <th style={{ width: '45%' }}>Descrição</th>
+                    <th style={{ width: '12%' }}>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -78,7 +70,7 @@ function Products() {
                     </tr>
                 ))}
                 </tbody>
-            </table>
+            </Table>
         </div>
     );
 }

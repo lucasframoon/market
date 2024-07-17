@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Src\Repository;
 
 use PDO;
-use Src\Model\SalesDetails;
+use Src\Model\SaleDetails;
 
 class SaleDetailsRepository extends AbstractRepository
 {
@@ -16,9 +16,9 @@ class SaleDetailsRepository extends AbstractRepository
         parent::__construct($pdo);
     }
 
-    protected function createModelInstance(): SalesDetails
+    protected function createModelInstance(): SaleDetails
     {
-        return new SalesDetails;
+        return new SaleDetails;
     }
 
     protected function getTableName(): string

@@ -14,7 +14,7 @@ import SalesForm from "./components/Sales/SalesForm";
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/*",
         element: <Dashboard/>
     },
     {
@@ -40,15 +40,15 @@ const router = createBrowserRouter([
     {
         path: "/sale/form/:id?",
         element: <SalesForm/>
-    },
+    }
 ])
 
 const root = createRoot(document.getElementById('root'));
 
 root.render(
-    <React.StrictMode>
-        <RouterProvider router={router}/>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <RouterProvider router={router}/>
+    // </React.StrictMode>
 );
 
 reportWebVitals();

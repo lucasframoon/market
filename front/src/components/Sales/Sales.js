@@ -4,6 +4,7 @@ import Alert from "../Alerts/Alert";
 import NewButton from "../Buttons/NewButton";
 import BackButton from '../Buttons/BackButton';
 import DeleteButton from "../Buttons/DeleteButton";
+import {Table} from "react-bootstrap";
 
 function Sales() {
     const [sales, setSales] = useState([]);
@@ -58,19 +59,19 @@ function Sales() {
             {successAlertMessage && <Alert message={successAlertMessage} variant='primary'/>}
             {errorAlertMessage && <Alert message={errorAlertMessage} variant='danger'/>}
             <h1 className="mt-5">Vendas</h1>
-            <div className="buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className="buttons" style={{display: 'flex', justifyContent: 'space-between'}}>
                 <BackButton path="/"/>
                 <NewButton path="/sale/form"/>
             </div>
-            <table className="table table-striped mt-3">
+            <Table striped bordered hover className="mt-3">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Data</th>
-                    <th>Valor Total</th>
-                    <th>Imposto total</th>
-                    <th>Produtos</th>
-                    <th>Ações</th>
+                    <th style={{width: '3%'}}>#</th>
+                    <th style={{width: '10%'}}>Data</th>
+                    <th style={{width: '8%'}}>Valor Total</th>
+                    <th style={{width: '8%'}}>Imposto total</th>
+                    <th style={{width: '52%'}}>Produtos</th>
+                    <th style={{width: '7%'}}>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -87,7 +88,7 @@ function Sales() {
                     </tr>
                 ))}
                 </tbody>
-            </table>
+            </Table>
         </div>
     );
 }
